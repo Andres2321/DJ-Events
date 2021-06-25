@@ -2,7 +2,6 @@ import Layout from "@/components/Layout";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import API_URL from "@/config/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/reactToastify.css";
 
@@ -41,8 +40,9 @@ export default function AddEventPage(){
       console.log(res)
         toast.error('Something Went Wrong')    
     } else {
-        const evt = await res.json()      
-        // router.push(`/events/${evt.slug}`)
+        const evt = await res.json()  
+        console.log(evt)    
+        router.push(`/events/${evt.slug}`)
     }  
 }
 

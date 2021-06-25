@@ -3,12 +3,13 @@ import Image from "next/image";
 
 export default function EventItem({ evt }) {
 
-  console.log(evt.image)
+  // console.log(evt.image[0].formats.thumbnail.url)
+
   return (
     <div>
       <div>
         <Image
-          src={ evt.image ? evt.image[0].formats.thumbnail.url : "/images/event-default.png" }
+          src={ evt.image ? evt.image.formats.thumbnail.url : "/images/event-default.png" }
           width={170}
           height={100}
         />
