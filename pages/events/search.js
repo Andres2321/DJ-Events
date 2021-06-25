@@ -1,12 +1,18 @@
 import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import EventItem from "components/EventItem";
+import {useRouter} from "next/router"
+import Link from "next/link"
+import qs from "qs"
 
 export default function SearchPage({ events }) {
-
+    const router = useRouter()
   return (
-    <Layout>
-      <h1>Events</h1>
+    <Layout title='Seach Results'>
+        <Link href='/events'>
+            Go Back
+        </Link>
+      <h1>Search results for {router.query.term}</h1>
       {events.length === 0 && <h3>No events to show</h3>}
 
       {events.map((evt) => (
@@ -17,7 +23,6 @@ export default function SearchPage({ events }) {
 }
 
 export async function getServerSideProps({query: {term}}) {
-
     const query = qs.stringify({
         _where:{
             _or: [
@@ -28,7 +33,7 @@ export async function getServerSideProps({query: {term}}) {
             ]
         }
     })
-  const res = await fetch(`${API_URL}/events?_sort=date:ASC`);
+  const res = await fetch(`${API_URL}/events?${query}`);
   const events = await res.json();
 
   return {
