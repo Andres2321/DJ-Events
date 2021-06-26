@@ -49,7 +49,7 @@ export default function EventPage({ evt }) {
         {evt.image && (
           <div>
             <Image
-              src={evt.image[0].formats.medium.url}
+              src={evt.image.formats.medium.url}
               width={960}
               height={600}
             />
