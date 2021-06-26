@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/reactToastify.css";
 
-export default function AddEventPage(){
+export default function AddEventPage() {
   const [values, setValues] = useState({
     name: "",
     performers: "",
@@ -16,41 +16,40 @@ export default function AddEventPage(){
     description: "",
   });
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
-      e.preventDefault()
-    
-      // Validation
+    e.preventDefault();
+
+    // Validation
     const hasEmptyFields = Object.values(values).some(
-      (element) => element === ''
-        )
+      (element) => element === ""
+    );
 
     if (hasEmptyFields) {
-        toast.error('Please fill in all fields')
+      toast.error("Please fill in all fields");
     }
     const res = await fetch(`http://localhost:1337/events`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(values),
-    })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
     if (!res.ok) {
-      console.log(res)
-        toast.error('Something Went Wrong')    
+      console.log(res);
+      toast.error("Something Went Wrong");
     } else {
-        const evt = await res.json()  
-        console.log(evt)    
-        router.push(`/events/${evt.slug}`)
-    }  
-}
-
-
-  const handleInputChange = (e) => {    
-      const { name, value } = e.target    
-      setValues({ ...values, [name]: value })  
+      const evt = await res.json();
+      console.log(evt);
+      router.push(`/events/${evt.slug}`);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
 
   return (
     <Layout title="Add New Event">
