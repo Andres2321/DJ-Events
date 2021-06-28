@@ -12,12 +12,8 @@ export default function ImageUpload({evtId, imageUploaded}) {
         const formData = new FormData()
         formData.append('files', image)
         formData.append('ref', 'events')
-        formData.append('refid', evtId)
+        formData.append('refId', evtId)
         formData.append('field', 'image')
-
-        formData.forEach((value, key) =>{
-            console.log(key, value)
-        })
 
         const res = await fetch(`${API_URL}/upload`, {
             method: 'POST',
