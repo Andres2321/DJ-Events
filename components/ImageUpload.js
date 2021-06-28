@@ -9,20 +9,15 @@ export default function ImageUpload({evtId, imageUploaded}) {
     const handleSubmit= async (e) => {
         e.preventDefault()
 
-        // const formData = new FormData()
-        // formData.append('files', image)
-        // formData.append('ref', 'events')
-        // formData.append('refid', evtId)
-        // formData.append('field', 'image')
+        const formData = new FormData()
+        formData.append('files', image)
+        formData.append('ref', 'events')
+        formData.append('refid', evtId)
+        formData.append('field', 'image')
 
-        const formData = {
-            'files': image,
-            'ref': 'events',
-            'refid': evtId,
-            'field': 'image'
-        }
-
-        console.log(formData)
+        formData.forEach((value, key) =>{
+            console.log(key, value)
+        })
 
         const res = await fetch(`${API_URL}/upload`, {
             method: 'POST',
@@ -30,7 +25,7 @@ export default function ImageUpload({evtId, imageUploaded}) {
         })
 
         if(res.ok) {
-            // imageUploaded()
+            imageUploaded()
         }
     }
 
