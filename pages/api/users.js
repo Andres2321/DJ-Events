@@ -7,9 +7,10 @@ export default async (req, res) => {
           res.status(403).json({message: 'Not Authorized'})
           return
       }
-
+      
       const {token} = cookie.parse(req.headers.cookie)
-      const strapiRes = await fetch(`${API_URL}/uers/me`, {
+
+      const strapiRes = await fetch(`${API_URL}/users/me`, {
           method: 'GET',
           headers: {
               Authorization: `Bearer ${token}`
